@@ -1,7 +1,7 @@
 <?php
 $name = $_POST['name'];
 $email = $_POST['email'];
-$compagny = $_POST['compagny'];
+$company = $_POST['company'];
 $subject = $_POST['subject'];
 $message = $_POST['message'];
 $error = "";
@@ -23,7 +23,7 @@ if(IsInjected($email))
 
 $msg =  " Name : $name \r\n"; 
 $msg .= " Email: $email \r\n";
-$msg .= " Compagny: $compagny \r\n";
+$msg .= " Company: $company \r\n";
 $msg .= " Subject: $subject \r\n";
 $msg .= " Message : ".stripslashes($_POST['message'])."\r\n\n";
 $msg .= "User information \r\n"; 
@@ -32,7 +32,7 @@ $msg .= "Browser info : ".$_SERVER["HTTP_USER_AGENT"]."\r\n";
 $msg .= "User come from : ".$_SERVER["SERVER_NAME"]."\r\n";
 $msg .= "Template Name : FOXEVCARD";
 
-$recipient = "ghribbenaissa@gmail.com";// Change the recipient email adress to your adrees  
+$recipient = "mustansirzain2@gmail.com";// Change the recipient email adress to your adrees  
 $sujet =  "Sender information";
 $mailheaders = "From: $email\r\nReply-To: $email\r\nReturn-Path: $email\r\n";
 

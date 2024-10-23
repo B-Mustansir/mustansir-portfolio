@@ -200,63 +200,61 @@
 
     // Contact form setup
 
+    // $('.send').on("click", function () {
 
-    $('.send').on("click", function () {
+    //     $('input#name').removeClass("error-Form");
+    //     $('textarea#message').removeClass("error-Form");
+    //     $('input#email').removeClass("error-Form");
 
-        $('input#name').removeClass("error-Form");
-        $('textarea#message').removeClass("error-Form");
-        $('input#email').removeClass("error-Form");
-
-        var error = false;
-        var name = $('input#name').val();
-        if (name == "" || name == " ") {
-            error = true;
-            $('input#name').addClass("error-Form");
-        }
-
-
-        var msg = $('textarea#message').val();
-        if (msg == "" || msg == " ") {
-            error = true;
-            $('textarea#message').addClass("error-Form");
-
-        }
-
-        var email_compare = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-        var email = $('input#email').val();
-        if (email == "" || email == " ") {
-            $('input#email').addClass("error-Form");
-            error = true;
-        } else if (!email_compare.test(email)) {
-            $('input#email').addClass("error-Form");
-            error = true;
-        }
-
-        if (error == true) {
-            return false;
-        }
-
-        var data_string = $('.contact-form').serialize();
+    //     var error = false;
+    //     var name = $('input#name').val();
+    //     if (name == "" || name == " ") {
+    //         error = true;
+    //         $('input#name').addClass("error-Form");
+    //     }
 
 
-        $.ajax({
-            type: "POST",
-            url: $('.contact-form').attr('action'),
-            data: data_string,
+    //     var msg = $('textarea#message').val();
+    //     if (msg == "" || msg == " ") {
+    //         error = true;
+    //         $('textarea#message').addClass("error-Form");
 
-            success: function (message) {
-                if (message == 'SENDING') {
-                    $('#success').fadeIn('slow');
-                } else {
-                    $('#error').fadeIn('slow');
-                }
-            }
+    //     }
 
-        });
+    //     var email_compare = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    //     var email = $('input#email').val();
+    //     if (email == "" || email == " ") {
+    //         $('input#email').addClass("error-Form");
+    //         error = true;
+    //     } else if (!email_compare.test(email)) {
+    //         $('input#email').addClass("error-Form");
+    //         error = true;
+    //     }
 
-        return false;
-    });
+    //     if (error == true) {
+    //         return false;
+    //     }
 
+    //     var data_string = $('.contact-form').serialize();
+
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: $('.contact-form').attr('action'),
+    //         data: data_string,
+
+    //         success: function (message) {
+    //             if (message == 'SENDING') {
+    //                 $('#success').fadeIn('slow');
+    //             } else {
+    //                 $('#error').fadeIn('slow');
+    //             }
+    //         }
+
+    //     });
+
+    //     return false;
+    // });
 
 
     // Style toggle
