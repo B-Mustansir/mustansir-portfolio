@@ -1,7 +1,7 @@
 .styler {
     background-color: #2c2d30;
     left: 30px;
-    position: fixed;
+    position: absolute;
     top: 50px;
     width: 278px;
     z-index: 9999;

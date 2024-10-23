@@ -1,9 +1,9 @@
-(function($) {
+(function ($) {
     "use strict";
 
     // Windows load
 
-    $(window).on("load", function() {
+    $(window).on("load", function () {
 
         // Site loader 
 
@@ -15,8 +15,8 @@
 
     // Scroll to
 
-    $(function() {
-        $(window).scroll(function() {
+    $(function () {
+        $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
                 $('.scroll-to-top').addClass('top');
             } else {
@@ -35,7 +35,6 @@
 
 
     // Tabs setup
-
     $('.wrapper.home').easytabs({
         animate: true,
         updateHash: false,
@@ -46,17 +45,35 @@
         tabs: ' #main-nav.tabbed > ul > li ',
         transitionInEasing: 'linear',
         transitionOutEasing: 'linear'
+    }).bind('easytabs:after', function (event, $clicked, $targetPanel) {
+        var styler = $('#styler');
 
+        // Check if the active tab is "home"
+        if ($targetPanel.attr('id') === 'home') {
+            // Animate the styler section to slide in from the left
+            if (styler.css('left') === '-278px') {
+                styler.animate({
+                    left: '30px'
+                });
+            }
+        } else {
+            // Animate the styler section to slide out to the left
+            if (styler.css('left') === '30px') {
+                styler.animate({
+                    left: '-278px'
+                });
+            }
+        }
     });
 
 
     // Update window position
-    
-    
-	  if (!(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i).test(navigator.userAgent || navigator.vendor || window.opera)) {
-            $('#main-nav.tabbed > ul > li, .project-nav li a').on('click', function() {
-        $.smoothScroll('+=' + $(window).height());
-    });
+
+
+    if (!(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i).test(navigator.userAgent || navigator.vendor || window.opera)) {
+        $('#main-nav.tabbed > ul > li, .project-nav li a').on('click', function () {
+            $.smoothScroll('+=' + $(window).height());
+        });
     }
 
 
@@ -101,7 +118,7 @@
 
     //Skills percentage
 
-    $(".percentage").each(function() {
+    $(".percentage").each(function () {
         var width = $(this).text();
         $(this).css("width", width).empty();
     });
@@ -110,7 +127,7 @@
     // Filtred portfolio
 
 
-    $('.filter li a').on("click", function(e) {
+    $('.filter li a').on("click", function (e) {
 
         e.preventDefault();
         $(this).addClass('active');
@@ -155,14 +172,14 @@
         animation: "bounceInDown",
         separator: ",",
         speed: 6000,
-        complete: function() {}
+        complete: function () { }
     });
 
 
     // Search input setup
 
 
-    $('.header-search-form .search-form-icon').on("click", function() {
+    $('.header-search-form .search-form-icon').on("click", function () {
         $(this).closest('.header-search-form').find('input[type="text"]').focus();
         if ($(this).closest('.header-search-form').find('input[type="text"]').val()) {
             $(this).closest('.header-search-form').find('input[type="submit"]').trigger('click');
@@ -173,7 +190,7 @@
     // Contact form setup
 
 
-    $('.send').on("click", function() {
+    $('.send').on("click", function () {
 
         $('input#name').removeClass("error-Form");
         $('textarea#message').removeClass("error-Form");
@@ -216,7 +233,7 @@
             url: $('.contact-form').attr('action'),
             data: data_string,
 
-            success: function(message) {
+            success: function (message) {
                 if (message == 'SENDING') {
                     $('#success').fadeIn('slow');
                 } else {
@@ -232,25 +249,59 @@
 
 
     // Style toggle
+    $('.styler').css('left', '30px');
 
+    // $('.toggle, .close-styler').click(function(e) {
+    //     e.preventDefault();
+    //     var styler = $('.styler');
+    //     console.log(styler.css('left'));
+    //     if (styler.css('left') === '-278px') {
+    //         $('.styler').animate({
+    //             left: '30px'
+    //         });
 
-    $('.toggle, .close-styler').click(function(e) {
-        e.preventDefault();
-        var styler = $('.styler');
-        console.log(styler.css('left'));
-        if (styler.css('left') === '-278px') {
-            $('.styler').animate({
-                left: '30px'
+    //     } else {
+    //         $('.styler').animate({
+    //             left: '-278px'
+    //         });
+
+    //     }
+    // });
+
+    // Print resume
+    $(document).ready(function() {
+        // Download my CV
+        $('#downloadCV').on('click', function(e) {
+            // This link directly downloads the file.
+            // No changes needed here as it is just a normal link.
+        });
+    
+        // Print my Resume
+        $('#printResume').on('click', function(e) {
+            e.preventDefault();
+            var resumeUrl = 'https://drive.usercontent.google.com/u/0/uc?id=1y75CwWxoVkW5tvbWj4B3798Ua4L1mGd4&export=download';
+    
+            // Create an iframe to load the PDF for printing
+            var $iframe = $('<iframe>', {
+                style: 'display:none;',
+                src: resumeUrl
+            }).appendTo('body');
+    
+            // When the iframe loads, trigger the print dialog
+            $iframe.on('load', function() {
+                this.contentWindow.focus(); // Focus the iframe window
+                this.contentWindow.print(); // Trigger the print dialog
             });
-
-        } else {
-            $('.styler').animate({
-                left: '-278px'
+    
+            // Optional: Remove the iframe after printing
+            $iframe.on('load', function() {
+                setTimeout(function() {
+                    $iframe.remove(); // Clean up the iframe after some time
+                }, 500);
             });
-
-        }
+        });
     });
-
-
+     
+    
 
 })(jQuery);
