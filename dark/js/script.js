@@ -35,6 +35,16 @@
 
 
     // Tabs setup
+    $(document).ready(function () {
+        var styler = $('#styler');
+
+        // Initial slide-in animation on page load
+        styler.css('left', '-278px'); // Set initial position
+        styler.animate({
+            left: '30px'
+        });
+    });
+
     $('.wrapper.home').easytabs({
         animate: true,
         updateHash: false,
@@ -65,6 +75,7 @@
             }
         }
     });
+
 
 
     // Update window position
@@ -269,39 +280,39 @@
     // });
 
     // Print resume
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Download my CV
-        $('#downloadCV').on('click', function(e) {
+        $('#downloadCV').on('click', function (e) {
             // This link directly downloads the file.
             // No changes needed here as it is just a normal link.
         });
-    
+
         // Print my Resume
-        $('#printResume').on('click', function(e) {
+        $('#printResume').on('click', function (e) {
             e.preventDefault();
             var resumeUrl = 'https://drive.usercontent.google.com/u/0/uc?id=1y75CwWxoVkW5tvbWj4B3798Ua4L1mGd4&export=download';
-    
+
             // Create an iframe to load the PDF for printing
             var $iframe = $('<iframe>', {
                 style: 'display:none;',
                 src: resumeUrl
             }).appendTo('body');
-    
+
             // When the iframe loads, trigger the print dialog
-            $iframe.on('load', function() {
+            $iframe.on('load', function () {
                 this.contentWindow.focus(); // Focus the iframe window
                 this.contentWindow.print(); // Trigger the print dialog
             });
-    
+
             // Optional: Remove the iframe after printing
-            $iframe.on('load', function() {
-                setTimeout(function() {
+            $iframe.on('load', function () {
+                setTimeout(function () {
                     $iframe.remove(); // Clean up the iframe after some time
                 }, 500);
             });
         });
     });
-     
-    
+
+
 
 })(jQuery);
